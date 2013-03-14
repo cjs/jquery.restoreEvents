@@ -25,11 +25,12 @@
         storeEvents: function(namespace){
             this.each(function(){
 
+                var events = {};
+
                 if (namespace) {
 
                     // If namespace is provided, buffer attached events to allEvents
                     var allEvents = $(this).data('events');
-                    var events = {};
 
                     // Iterate over allEvents and fetch events that match namespace
                     for (var eventGroup in allEvents) {
@@ -53,7 +54,7 @@
                     // If no namespace is provided, store all events
                     // We take advantage of jQuery's $.extend(deep=true, …)
                     // because we need to recursively copy the whole events-object
-                    var events = $.extend(true, {}, $(this).data('events'));
+                    events = $.extend(true, {}, $(this).data('events'));
                 }
 
                 // Store events in the data-attribute of the relevant element
