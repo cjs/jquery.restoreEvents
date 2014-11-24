@@ -30,7 +30,7 @@
                 if (namespace) {
 
                     // If namespace is provided, buffer attached events to allEvents
-                    var allEvents = $(this).data('events');
+                    var allEvents = jQuery._data($(this)[0], 'events');
 
                     // Iterate over allEvents and fetch events that match namespace
                     for (var eventGroup in allEvents) {
@@ -54,7 +54,7 @@
                     // If no namespace is provided, store all events
                     // We take advantage of jQuery's $.extend(deep=true, …)
                     // because we need to recursively copy the whole events-object
-                    events = $.extend(true, {}, $(this).data('events'));
+                    events = $.extend(true, {},  jQuery._data($(this)[0], 'events'));
                 }
 
                 // Store events in the data-attribute of the relevant element
