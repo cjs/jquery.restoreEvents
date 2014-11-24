@@ -22,7 +22,7 @@
     $.fn.extend({
 
         // store events attached to a jQuery element
-        storeEvents: function(namespace){
+        storeEvents: function(namespace, eventFilter){
             this.each(function(){
 
                 var events = {};
@@ -57,6 +57,15 @@
                     events = $.extend(true, {},  jQuery._data($(this)[0], 'events'));
                 }
 
+                // Filter out events not included in the function parameters, if provided
+                // There is probably a better way to do this
+                if(eventFilter) {
+                    for (var eventName in events ) {
+                        if (eventFilter.indexOf(eventName) < 0) {
+                            delete events[eventName];
+                        }
+                    }
+                }
                 // Store events in the data-attribute of the relevant element
                 $(this).data('storedEvents', events);
 
